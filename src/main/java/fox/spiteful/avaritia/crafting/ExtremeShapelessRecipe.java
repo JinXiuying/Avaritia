@@ -4,7 +4,6 @@ import net.minecraft.inventory.InventoryCrafting;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.IRecipe;
 import net.minecraft.world.World;
-import net.minecraftforge.common.ForgeHooks;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -52,9 +51,12 @@ public class ExtremeShapelessRecipe implements IRecipe
 
                         if (itemstack.getItem() == itemstack1.getItem() && (itemstack1.getItemDamage() == 32767 || itemstack.getItemDamage() == itemstack1.getItemDamage()))
                         {
-                            flag = true;
-                            arraylist.remove(itemstack1);
-                            break;
+                            if (!itemstack1.hasTagCompound() || ItemStack.areItemStackTagsEqual(itemstack1, itemstack))
+                            {
+                                flag = true;
+                                arraylist.remove(itemstack1);
+                                break;
+                            }
                         }
                     }
 
@@ -83,11 +85,5 @@ public class ExtremeShapelessRecipe implements IRecipe
     public int getRecipeSize()
     {
         return this.recipeItems.size();
-    }
-
-    @Override
-    public ItemStack[] getRemainingItems(InventoryCrafting inv) //getRecipeLeftovers
-    {
-        return ForgeHooks.defaultRecipeGetRemainingItems(inv);
     }
 }
