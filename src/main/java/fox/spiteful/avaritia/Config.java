@@ -33,6 +33,7 @@ public class Config {
     public static boolean te = true;
     public static boolean numanuma = true;
     public static boolean metallurgy = true;
+    public static boolean darksteel = true;
     public static boolean enderio = true;
     public static boolean forestry = true;
     public static boolean bees = false;
